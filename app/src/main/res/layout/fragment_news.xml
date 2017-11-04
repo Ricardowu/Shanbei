@@ -2,12 +2,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="me.ricardo.shanbei.NewsFragment">
+    tools:context="me.ricardo.shanbei.news.NewsFragment"
+    android:id="@+id/news_framelayout">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:scrollbars="vertical">
+
+        <me.ricardo.shanbei.news.NewsTextView
+            android:id="@+id/news_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="false"
+            android:textSize="18sp" />
+    </ScrollView>
+
 
 </FrameLayout>
