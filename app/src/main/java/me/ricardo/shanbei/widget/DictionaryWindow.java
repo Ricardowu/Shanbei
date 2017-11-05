@@ -24,8 +24,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+
 /**
- * Created by ricardo on 10/31/17.
+ * 基于PopupWindow的查单词插件，方便多处复用。
  */
 
 public class DictionaryWindow extends PopupWindow {
@@ -39,6 +40,8 @@ public class DictionaryWindow extends PopupWindow {
     public DictionaryWindow(Context context) {
         mContext = context;
         View view = LayoutInflater.from(context).inflate(R.layout.window_dictionary, null);
+
+        // 发音按钮
         ImageView pronIv = view.findViewById(R.id.btn_pronounce);
         pronIv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +59,7 @@ public class DictionaryWindow extends PopupWindow {
             }
         });
 
+        // 关闭按钮
         ImageView closeIv = view.findViewById(R.id.btn_close);
         closeIv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +68,7 @@ public class DictionaryWindow extends PopupWindow {
             }
         });
 
+        // 添加单词按钮
         Button addWord = view.findViewById(R.id.dict_add_word);
         addWord.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +80,7 @@ public class DictionaryWindow extends PopupWindow {
         soundTv = view.findViewById(R.id.dict_sound);
         definitionTv = view.findViewById(R.id.dict_definition);
 
+        // 点击其他位置关闭查词界面
         setOutsideTouchable(true);
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -91,6 +97,10 @@ public class DictionaryWindow extends PopupWindow {
         setAnimationStyle(R.style.pop_up_dictionary_anim);
     }
 
+    /**
+     * 传入待查找的单词，开一个线程用OKHTTP发送请求，拿回数据用主线程Handler更新UI。
+     * @param word 单词
+     */
     public void searchWord(final String word) {
         if (!word.isEmpty()) {
             new Thread() {
@@ -128,6 +138,10 @@ public class DictionaryWindow extends PopupWindow {
         }
     }
 
+    /**
+     * 将单词查找返回结果显示出来，注意这里要在主线程更新UI
+     * @param data 网络查找返回的结果data字段
+     */
     private void displayInfo(JSONObject data) {
         wordTv.setText(data.getString("content"));
         soundTv.setText(data.getString("pronunciation"));

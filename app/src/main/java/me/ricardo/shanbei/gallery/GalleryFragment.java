@@ -14,7 +14,6 @@ import android.widget.Toast;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import me.ricardo.shanbei.R;
@@ -41,6 +40,10 @@ public class GalleryFragment extends Fragment {
         return view;
     }
 
+    /**
+     * 读取本地Images文件夹的内容
+     * @return 文件名列表
+     */
     private List<String> loadLocalImageFiles() {
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             Toast.makeText(getActivity(), "SD卡不可用！", Toast.LENGTH_LONG).show();
@@ -56,6 +59,10 @@ public class GalleryFragment extends Fragment {
         return list;
     }
 
+    /**
+     * 网络图片链接存放在txt文件中方便模拟，读取所有的链接
+     * @return 网络图片的URL列表
+     */
     private List<String> loadOnlineImages() {
         String text = Utils.getAssetsTxt(getActivity(), "links.txt");
         if (text == null || text.length() <= 0) {

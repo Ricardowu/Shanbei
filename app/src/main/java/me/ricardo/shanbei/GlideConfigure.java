@@ -7,16 +7,13 @@ import android.support.annotation.Nullable;
 import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.load.engine.cache.DiskCache;
-import com.bumptech.glide.load.engine.cache.DiskLruCacheFactory;
 import com.bumptech.glide.load.engine.cache.DiskLruCacheWrapper;
 import com.bumptech.glide.module.AppGlideModule;
 
 import java.io.File;
 
-import okhttp3.internal.cache.DiskLruCache;
-
 /**
- * Created by ricardo on 11/4/17.
+ * 配置Glide的缓存目录
  */
 
 @GlideModule

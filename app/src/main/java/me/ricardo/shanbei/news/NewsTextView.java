@@ -46,6 +46,9 @@ public class NewsTextView extends android.support.v7.widget.AppCompatTextView {
         return true;
     }
 
+    /**
+     * 从文本文件中加载内容
+     */
     public void loadTxt() {
         String text = Utils.getAssetsTxt(MainActivity.instance, "news.txt");
         mSpanText = new SpannableStringBuilder(text);
@@ -57,6 +60,11 @@ public class NewsTextView extends android.support.v7.widget.AppCompatTextView {
         mCharWidth = rect.width();
     }
 
+    /**
+     * 响应点击事件，从TextView中计算选择单词
+     * @param x x坐标
+     * @param y y坐标
+     */
     private void selectWord(float x, float y) {
         Layout layout = getLayout();
         int lineNumber = layout.getLineForVertical((int) y);
@@ -106,6 +114,11 @@ public class NewsTextView extends android.support.v7.widget.AppCompatTextView {
         mWindow.searchWord(word);
     }
 
+    /**
+     * 高亮显示选中单词
+     * @param word 需要显示的单词
+     * @param offset 在Spanable的Text中从首字符算起的位移
+     */
     private void highlightWord(String word, int offset) {
         if (offset != currentOffset) {
             mSpanText.setSpan(currentSpan, offset,
@@ -115,12 +128,19 @@ public class NewsTextView extends android.support.v7.widget.AppCompatTextView {
         }
     }
 
+    /**
+     * 取消高亮显示的单词
+     */
     private void unHighlightWord() {
-        System.out.println("-----unhighlight");
         mSpanText.removeSpan(currentSpan);
         setText(mSpanText);
     }
 
+    /**
+     * 是否是有效字符，这里设置允许单词包括：字母，数字和'-'连接符
+     * @param c 待判断的字符
+     * @return
+     */
     private static boolean isValidCharacter(char c) {
         return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || (c == '-');
     }

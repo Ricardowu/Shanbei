@@ -46,19 +46,19 @@ public class ImagesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (path == null || path.length() == 0) {
             return;
         }
-        System.out.println("-----path: " + path);
-        System.out.println("-----Count: " + getItemCount());
         if (path.startsWith("http")) {
-            System.out.println("-----Loading remote");
+            System.out.println("-----Loading remote: " + path);
+            // 网络图片参数：使用预设图片作placeholder；error后重试一次，再次失败使用预设图片；只缓存原图片
             GlideApp.with(mContext).load(path).placeholder(R.mipmap.default_holder).
                     error(GlideApp.with(mContext).load(path).error(R.mipmap.default_holder)).
-                    diskCacheStrategy(DiskCacheStrategy.RESOURCE).
+                    diskCacheStrategy(DiskCacheStrategy.DATA).
                     into(((ImageViewHolder) holder).imageView);
         } else {
-            System.out.println("-----Loading local");
+            System.out.println("-----Loading local: " + path);
+            // 本地图片参数：不缓存缩略图
             GlideApp.with(mContext).load("file://" +
-                    mContext.getExternalFilesDir("Images").getAbsolutePath() + File.separator + path).
-                    error(R.mipmap.default_holder).
+                    mContext.getExternalFilesDir("Images").getPath() + File.separator + path).
+                    placeholder(R.mipmap.default_holder).
                     diskCacheStrategy(DiskCacheStrategy.NONE).
                     into(((ImageViewHolder) holder).imageView);
         }

@@ -9,11 +9,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-/**
- * Created by ricardo on 10/30/17.
- */
-
 public class Utils {
+    /**
+     * 本地Assets读取工具
+     * @param context
+     * @param fileName
+     * @return
+     */
     public static String getAssetsTxt(Context context, String fileName) {
         try {
             InputStream is = context.getAssets().open(fileName);

@@ -20,7 +20,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:text="china"
                 android:textSize="20sp" />
 
             <TextView
@@ -28,7 +27,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:text="fayin"
                 android:textSize="18sp" />
 
             <ImageView
@@ -68,7 +66,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:text="n. 中国"
             android:textSize="20sp" />
     </LinearLayout>
 
